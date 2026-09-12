@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  background: #0f0f14;
+  color: white;
+  font-family: Arial;
+}
+
+h1 {
+  text-align: center;
+}
+
+#chat {
+  height: 80vh;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+#bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+}
+
+input {
+  flex: 1;
+  padding: 15px;
+  background: #1a1a22;
+  border: none;
+  color: white;
+}
+
+button {
+  padding: 15px;
+  background: #333;
+  color: white;
+  border: none;
+}

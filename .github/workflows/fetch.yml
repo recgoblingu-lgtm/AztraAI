@@ -19,8 +19,7 @@ jobs:
       - name: Update knowledge
         run: |
           mkdir -p data
-
-          python3 <<EOF
+          python3 << 'EOF'
 import json, requests, random, re
 
 # Load existing knowledge
@@ -30,7 +29,6 @@ try:
 except:
     data = {"topics": []}
 
-# Query pool (wide topics)
 queries = [
     "programming basics",
     "javascript tutorial",
@@ -46,17 +44,7 @@ queries = [
     "software engineering",
     "how apps work",
     "game design",
-    "cloud computing",
-    "how internet works",
-    "what is API",
-    "what is JSON",
-    "frontend vs backend",
-    "how to debug code",
-    "algorithms explained",
-    "data structures basics",
-    "linux operating system",
-    "how databases work",
-    "how servers work"
+    "cloud computing"
 ]
 
 def clean_keyword(query):
@@ -75,8 +63,7 @@ def summarize(text, query):
 
     return ". ".join(sentences[:2]) + "."
 
-# 🔥 Learn MANY things per run
-for _ in range(15):  # 15 queries
+for _ in range(15):
     query = random.choice(queries)
 
     try:
@@ -85,18 +72,15 @@ for _ in range(15):  # 15 queries
 
         texts = []
 
-        # Main abstract
         if res.get("AbstractText"):
             texts.append(res["AbstractText"])
 
-        # Related topics
         if res.get("RelatedTopics"):
             for t in res["RelatedTopics"][:5]:
                 if isinstance(t, dict) and t.get("Text"):
                     texts.append(t["Text"])
 
-        # Summarize each piece
-        for text in texts[:7]:  # up to 7 per query
+        for text in texts[:7]:
             summary = summarize(text, query)
 
             new_entry = {
@@ -117,10 +101,8 @@ for item in data["topics"]:
         filtered.append(item)
         seen.add(item["info"])
 
-# Keep last 300 entries (prevents lag)
 data["topics"] = filtered[-300:]
 
-# Save
 with open("data/knowledge.json", "w") as f:
     json.dump(data, f, indent=2)
 

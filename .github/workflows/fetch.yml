@@ -30,157 +30,84 @@ try:
 except:
     data = {"topics": []}
 
-# Rotating topics (you can add more)queries = [
-    # Programming basics
-    "what is programming",
-    "how to code",
-    "beginner coding tutorial",
-    "what is a variable",
-    "what are functions in programming",
-    "loops in programming explained",
-
-    # JavaScript
+# Query pool (wide topics)
+queries = [
+    "programming basics",
     "javascript tutorial",
-    "how to use javascript",
-    "javascript basics for beginners",
-    "what is dom javascript",
-    "javascript fetch api",
-    "how to make a game in javascript",
-
-    # Python
-    "python programming basics",
-    "what is python used for",
-    "python tutorial beginner",
-    "how to build apps with python",
-
-    # Web dev
+    "python programming",
     "how to build a website",
-    "html css javascript guide",
-    "what is frontend development",
-    "what is backend development",
-    "how websites work",
-    "responsive web design basics",
-
-    # AI / Tech
-    "what is artificial intelligence",
-    "how machine learning works",
-    "what is neural network",
-    "how chatbots work",
-    "what is generative ai",
-    "how ai models are trained",
-
-    # Game dev
-    "how to make a game",
-    "game development basics",
-    "how to make a 2d game",
-    "how to make a 3d game",
-    "what is unity engine",
-    "what is unreal engine",
-    "how physics works in games",
-
-    # Graphics
-    "what is webgl",
-    "how 3d rendering works",
-    "what is ray tracing",
-    "how game graphics work",
-
-    # Computer science
+    "artificial intelligence",
+    "machine learning",
+    "game development",
+    "web development",
+    "computer science",
+    "cybersecurity",
     "how computers work",
-    "what is cpu",
-    "what is gpu",
-    "how memory works in computers",
-    "what is binary",
-
-    # Internet
-    "how the internet works",
-    "what is http",
-    "what is dns",
-    "how browsers work",
-
-    # Security
-    "what is cybersecurity",
-    "how encryption works",
-    "what is hashing",
-    "how passwords are stored",
-
-    # Tools
-    "what is git",
-    "how github works",
-    "what is version control",
-    "what is api",
-    "what is json",
-
-    # App dev
-    "how to build an app",
-    "how mobile apps work",
-    "what is cross platform development",
-
-    # Business / money
-    "how to make money online",
-    "how startups work",
-    "how to build a tech product",
-
-    # Random tech
-    "what is cloud computing",
-    "what is database",
-    "what is server",
-    "what is hosting",
-    "how software works",
-
-    # Game ideas / fun
-    "game design ideas",
-    "how to design levels",
-    "what makes a game fun",
-    "how multiplayer works",
-
-    # Advanced topics
-    "what is blockchain",
-    "what is virtualization",
-    "what is operating system",
-    "how linux works",
-
-    # Extra filler to keep it growing
-    "coding tips for beginners",
-    "best programming practices",
+    "software engineering",
+    "how apps work",
+    "game design",
+    "cloud computing",
+    "how internet works",
+    "what is API",
+    "what is JSON",
+    "frontend vs backend",
     "how to debug code",
-    "how to optimize performance",
-    "how algorithms work"
+    "algorithms explained",
+    "data structures basics",
+    "linux operating system",
+    "how databases work",
+    "how servers work"
 ]
 
-query = random.choice(queries)
+def clean_keyword(query):
+    words = query.lower().split()
+    stopwords = ["what","is","how","to","a","the"]
+    words = [w for w in words if w not in stopwords]
+    return words[0] if words else query
 
-# Fetch data from DuckDuckGo
-url = f"https://api.duckduckgo.com/?q={query}&format=json"
-res = requests.get(url).json()
-
-text = (
-    res.get("AbstractText")
-    or (res.get("RelatedTopics", [{}])[0].get("Text") if res.get("RelatedTopics") else "")
-    or query
-)
-
-# --- SUMMARIZER ---
-def summarize(text):
+def summarize(text, query):
     text = re.sub(r'\s+', ' ', text).strip()
-
     sentences = re.split(r'[.!?]', text)
-    sentences = [s.strip() for s in sentences if len(s.strip()) > 20]
+    sentences = [s.strip() for s in sentences if len(s.strip()) > 25]
 
     if not sentences:
-        return f"{query} is an important concept in technology."
+        return f"{query} is an important concept."
 
     return ". ".join(sentences[:2]) + "."
 
-summary = summarize(text)
+# 🔥 Learn MANY things per run
+for _ in range(15):  # 15 queries
+    query = random.choice(queries)
 
-# Create entry
-new_entry = {
-    "keyword": query.split()[0],
-    "info": summary
-}
+    try:
+        url = f"https://api.duckduckgo.com/?q={query}&format=json"
+        res = requests.get(url).json()
 
-# Add to knowledge
-data["topics"].append(new_entry)
+        texts = []
+
+        # Main abstract
+        if res.get("AbstractText"):
+            texts.append(res["AbstractText"])
+
+        # Related topics
+        if res.get("RelatedTopics"):
+            for t in res["RelatedTopics"][:5]:
+                if isinstance(t, dict) and t.get("Text"):
+                    texts.append(t["Text"])
+
+        # Summarize each piece
+        for text in texts[:7]:  # up to 7 per query
+            summary = summarize(text, query)
+
+            new_entry = {
+                "keyword": clean_keyword(query),
+                "info": summary
+            }
+
+            data["topics"].append(new_entry)
+
+    except:
+        continue
 
 # Remove duplicates
 seen = set()
@@ -190,14 +117,14 @@ for item in data["topics"]:
         filtered.append(item)
         seen.add(item["info"])
 
-# Keep last 120 entries (prevents lag)
-data["topics"] = filtered[-120:]
+# Keep last 300 entries (prevents lag)
+data["topics"] = filtered[-300:]
 
 # Save
 with open("data/knowledge.json", "w") as f:
     json.dump(data, f, indent=2)
 
-print("Added:", new_entry)
+print("Total knowledge:", len(data["topics"]))
 EOF
 
       - name: Commit changes

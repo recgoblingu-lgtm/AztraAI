@@ -1,0 +1,75 @@
+{
+  "topics": [
+    {"keyword": "hello", "info": "yo"},
+    {"keyword": "hi", "info": "hey"},
+
+    {"keyword": "ai", "info": "AI systems combine models with data and logic. Many modern AIs use live retrieval instead of storing everything."},
+    {"keyword": "machine learning", "info": "Machine learning is training models to recognize patterns in data."},
+    {"keyword": "neural network", "info": "Neural networks are layers of nodes that learn patterns, inspired by the human brain."},
+
+    {"keyword": "javascript", "info": "JavaScript is used for web apps, games, and interactive UI. You can use canvas or WebGL."},
+    {"keyword": "html", "info": "HTML structures web pages using elements like divs, buttons, and inputs."},
+    {"keyword": "css", "info": "CSS styles websites with colors, layouts, and animations."},
+    {"keyword": "web development", "info": "Web development includes frontend (UI) and backend (logic and servers)."},
+    {"keyword": "frontend", "info": "Frontend is what users see: HTML, CSS, and JavaScript."},
+    {"keyword": "backend", "info": "Backend handles logic, APIs, and data processing."},
+
+    {"keyword": "python", "info": "Python is used for AI, scripting, and backend development."},
+    {"keyword": "flask", "info": "Flask is a lightweight Python framework for building APIs."},
+    {"keyword": "node", "info": "Node.js lets you run JavaScript on the server."},
+
+    {"keyword": "game", "info": "Game development involves graphics, input, physics, and logic."},
+    {"keyword": "2d game", "info": "2D games use sprites and simple rendering systems like canvas."},
+    {"keyword": "3d game", "info": "3D games use engines or WebGL to render depth and perspective."},
+    {"keyword": "unity", "info": "Unity is a popular game engine for 2D and 3D games."},
+    {"keyword": "unreal", "info": "Unreal Engine is used for high-end 3D games with realistic graphics."},
+    {"keyword": "webgl", "info": "WebGL renders 3D graphics directly in the browser."},
+    {"keyword": "canvas", "info": "Canvas lets you draw graphics and build games in JavaScript."},
+
+    {"keyword": "minecraft", "info": "Minecraft is a voxel-based sandbox game with block building and survival mechanics."},
+    {"keyword": "voxel", "info": "Voxel games use cubes as the basic building unit, like Minecraft."},
+
+    {"keyword": "fps", "info": "FPS stands for frames per second or first-person shooter depending on context."},
+    {"keyword": "shooter", "info": "Shooter games involve aiming, weapons, and combat mechanics."},
+
+    {"keyword": "github", "info": "GitHub hosts code repositories and supports version control using Git."},
+    {"keyword": "github pages", "info": "GitHub Pages lets you host static websites for free."},
+    {"keyword": "git", "info": "Git is a version control system used to track changes in code."},
+
+    {"keyword": "api", "info": "An API lets different systems communicate with each other."},
+    {"keyword": "fetch", "info": "Fetch is a JavaScript function used to make web requests."},
+    {"keyword": "json", "info": "JSON is a format used to store and exchange data."},
+
+    {"keyword": "how to code", "info": "Start with basics like variables, loops, and functions, then build small projects."},
+    {"keyword": "learn programming", "info": "Practice consistently and build projects to improve faster."},
+
+    {"keyword": "website", "info": "A website is built using HTML, styled with CSS, and powered by JavaScript."},
+    {"keyword": "make a website", "info": "Create an index.html, add CSS, then use JavaScript for interactivity."},
+
+    {"keyword": "bug", "info": "A bug is an error in code that causes incorrect behavior."},
+    {"keyword": "debug", "info": "Debugging is the process of finding and fixing errors in code."},
+
+    {"keyword": "computer", "info": "A computer processes data using hardware and software."},
+    {"keyword": "cpu", "info": "The CPU executes instructions and processes data."},
+    {"keyword": "gpu", "info": "The GPU handles graphics rendering and parallel computations."},
+
+    {"keyword": "internet", "info": "The internet is a global network connecting millions of computers."},
+    {"keyword": "browser", "info": "A browser lets you access websites and run web apps."},
+
+    {"keyword": "security", "info": "Security protects systems and data from unauthorized access."},
+    {"keyword": "encryption", "info": "Encryption protects data by converting it into unreadable form."},
+
+    {"keyword": "money", "info": "Making money online usually involves building useful tools, services, or content."},
+    {"keyword": "startup", "info": "A startup is a company focused on building and scaling a product quickly."},
+
+    {"keyword": "design", "info": "Design focuses on layout, usability, and visual appearance."},
+    {"keyword": "ui", "info": "UI stands for user interface, how users interact with a system."},
+    {"keyword": "ux", "info": "UX is user experience, how smooth and intuitive something feels."},
+
+    {"keyword": "terminal", "info": "A terminal lets you run commands directly on your system."},
+    {"keyword": "linux", "info": "Linux is an open-source operating system used by developers."},
+
+    {"keyword": "what can you do", "info": "I can help with coding, ideas, debugging, and building projects."},
+    {"keyword": "who made you", "info": "I was built as AztraAI."}
+  ]
+}
